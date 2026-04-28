@@ -12,7 +12,7 @@ function AddCar() {
     });
 
     useEffect(() => {
-        fetch("http://localhost:3000/makes")
+        fetch("https://odin-inventory-gk98.onrender.com/makes")
             .then((res) => res.json())
             .then((data) => {
                 setMakes(data);
@@ -38,7 +38,7 @@ function AddCar() {
         }
 
         try {
-            const response = await fetch('http://localhost:3000/models', {
+            const response = await fetch('https://odin-inventory-gk98.onrender.com/models', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

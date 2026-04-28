@@ -15,7 +15,7 @@ function EditCar() {
 
     // Fetch all makes
     useEffect(() => {
-        fetch("http://localhost:3000/makes")
+        fetch("https://odin-inventory-gk98.onrender.com/makes")
             .then((res) => res.json())
             .then((data) => {
                 setMakes(data);
@@ -25,7 +25,7 @@ function EditCar() {
 
     // Fetch the specific car data
     useEffect(() => {
-        fetch(`http://localhost:3000/models/${id}`)
+        fetch(`https://odin-inventory-gk98.onrender.com/models/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 setFormData({
@@ -60,7 +60,7 @@ function EditCar() {
         }
 
         try {
-            const response = await fetch(`http://localhost:3000/models/${id}`, {
+            const response = await fetch(`https://odin-inventory-gk98.onrender.com/models/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

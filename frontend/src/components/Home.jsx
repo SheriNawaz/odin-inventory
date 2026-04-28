@@ -14,7 +14,7 @@ function Home() {
   
 
     useEffect(() => {
-        fetch("http://localhost:3000/makes")
+        fetch("https://odin-inventory-gk98.onrender.com/makes")
         .then((res) => res.json())
         .then((data) => {
             setMakes(data);
@@ -23,7 +23,7 @@ function Home() {
     }, []);
 
     useEffect(() => {
-        fetch("http://localhost:3000/models")
+        fetch("https://odin-inventory-gk98.onrender.com/models")
         .then((res) => res.json())
         .then((data) => {
             setModels(data);
@@ -46,7 +46,7 @@ function Home() {
     const handleDeleteModel = async (modelId) => {
         if (window.confirm('Are you sure you want to delete this model?')) {
             try {
-                const response = await fetch(`http://localhost:3000/models/${modelId}`, {
+                const response = await fetch(`https://odin-inventory-gk98.onrender.com/models/${modelId}`, {
                     method: 'DELETE'
                 });
 
