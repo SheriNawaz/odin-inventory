@@ -15,20 +15,32 @@ function Home() {
 
     useEffect(() => {
         fetch("https://odin-inventory-gk98.onrender.com/makes")
-        .then((res) => res.json())
-        .then((data) => {
-            setMakes(data);
+        .then((res) => {
+            if (!res.ok) throw new Error('Failed to fetch makes');
+            return res.json();
         })
-        .catch((err) => console.error(err));
+        .then((data) => {
+            setMakes(Array.isArray(data) ? data : []);
+        })
+        .catch((err) => {
+            console.error('Error fetching makes:', err);
+            setMakes([]);
+        });
     }, []);
 
     useEffect(() => {
         fetch("https://odin-inventory-gk98.onrender.com/models")
-        .then((res) => res.json())
-        .then((data) => {
-            setModels(data);
+        .then((res) => {
+            if (!res.ok) throw new Error('Failed to fetch models');
+            return res.json();
         })
-        .catch((err) => console.error(err));
+        .then((data) => {
+            setModels(Array.isArray(data) ? data : []);
+        })
+        .catch((err) => {
+            console.error('Error fetching models:', err);
+            setModels([]);
+        });
     }, []);
 
     const filteredModels = selectedMakeIds.length > 0

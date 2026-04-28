@@ -16,17 +16,26 @@ function EditCar() {
     // Fetch all makes
     useEffect(() => {
         fetch("https://odin-inventory-gk98.onrender.com/makes")
-            .then((res) => res.json())
-            .then((data) => {
-                setMakes(data);
+            .then((res) => {
+                if (!res.ok) throw new Error('Failed to fetch makes');
+                return res.json();
             })
-            .catch((err) => console.error(err));
+            .then((data) => {
+                setMakes(Array.isArray(data) ? data : []);
+            })
+            .catch((err) => {
+                console.error('Error fetching makes:', err);
+                setMakes([]);
+            });
     }, []);
 
     // Fetch the specific car data
     useEffect(() => {
         fetch(`https://odin-inventory-gk98.onrender.com/models/${id}`)
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) throw new Error('Failed to fetch car data');
+                return res.json();
+            })
             .then((data) => {
                 setFormData({
                     make_id: data.make_id,
@@ -37,7 +46,7 @@ function EditCar() {
                 setLoading(false);
             })
             .catch((err) => {
-                console.error(err);
+                console.error('Error loading car:', err);
                 alert('Failed to load car data');
                 navigate('/');
             });

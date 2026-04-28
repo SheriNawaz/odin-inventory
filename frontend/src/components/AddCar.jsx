@@ -13,11 +13,17 @@ function AddCar() {
 
     useEffect(() => {
         fetch("https://odin-inventory-gk98.onrender.com/makes")
-            .then((res) => res.json())
-            .then((data) => {
-                setMakes(data);
+            .then((res) => {
+                if (!res.ok) throw new Error('Failed to fetch makes');
+                return res.json();
             })
-            .catch((err) => console.error(err));
+            .then((data) => {
+                setMakes(Array.isArray(data) ? data : []);
+            })
+            .catch((err) => {
+                console.error('Error fetching makes:', err);
+                setMakes([]);
+            });
     }, []);
 
     const handleChange = (e) => {
